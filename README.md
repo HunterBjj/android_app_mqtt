@@ -1,1 +1,3 @@
-# android_app_mqtt
+### android_app_mqtt
+
+Приложение передает и принимает данные по протоколу MQTT
