@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="Подключение"
+        android:id="@+id/id_bt_connect"
+        android:orderInCategory="200"
+        app:showAsAction="always|withText"
+        />
+
+    <item android:title="Поиск устройств"
+        android:icon="@drawable/ic_search"
+        android:id="@+id/id_search"
+        android:orderInCategory="500"
+        app:showAsAction="ifRoom|withText"
+        />
+
+    <group android:id="@+id/menuColor" >
+        <item
+            android:id="@+id/color"
+            android:title="ЦВЕТ СВЕЧЕНИЯ">
+            <menu>
+                <item
+                    android:id="@+id/redButton"
+                    android:title="Красный"/>
+                <item
+                    android:id="@+id/yellowButton"
+                    android:title="Желтый"/>
+                <item
+                    android:id="@+id/whiteButton"
+                    android:title="Белый"/>
+                <item
+                    android:id="@+id/greenButton"
+                    android:title="Зеленый"/>
+            </menu>
+        </item>
+    </group>
+
+</menu>
