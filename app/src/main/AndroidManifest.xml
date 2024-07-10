@@ -13,11 +13,12 @@
         android:supportsRtl="true"
 
         tools:targetApi="31"
-        tools:replace="android:theme">
+        tools:replace="android:Base.Theme.MQTT_BT_APP">
         <activity
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" android:theme="@style/AppTheme">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -9,68 +9,44 @@
     >
 
 
-
-
     <TextView
         android:id="@+id/textColor"
         android:layout_width="match_parent"
         android:layout_height="31dp"
-        android:layout_marginTop="25dp"
         android:text="Цвет свечения:"
         android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textVolt" />
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="241dp" />
 
     <TextView
         android:id="@+id/textVolt"
         android:layout_width="match_parent"
         android:layout_height="32dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="32dp"
         android:text="Напряжение батареи:"
         android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lux" />
-
+        app:layout_constraintTop_toBottomOf="@+id/textColor" />
 
     <TextView
         android:id="@+id/glimpsMode"
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="96dp"
         android:text="Режим проблеска:"
         android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textColor" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="39dp"
-        android:autoSizeMaxTextSize="100dp"
-        android:autoSizeMinTextSize="7dp"
-        android:autoSizeStepGranularity="2dp"
-        android:autoSizeTextType="uniform"
-        android:text="Данные"
-        android:textAlignment="center"
-        android:textColor="@color/purple_500"
-        app:layout_constraintBottom_toTopOf="@+id/lux"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textColor" />
 
 
     <FrameLayout

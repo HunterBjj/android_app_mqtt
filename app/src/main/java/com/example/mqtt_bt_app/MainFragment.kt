@@ -36,7 +36,6 @@ class MainFragment : Fragment(), BluetoothController.Listener {
     private lateinit var bluetoothController: BluetoothController
     private lateinit var btAdapter: BluetoothAdapter
     private lateinit var binding: FragmentMainBinding
-    private lateinit var parametersRecyclerView: RecyclerView
     private lateinit var mqttClient: MqttAndroidClient
 
     private val mqttServerUri = "tcp://mqtt.eclipse.org:1883"
@@ -45,7 +44,7 @@ class MainFragment : Fragment(), BluetoothController.Listener {
     private val publishTopic = "test/topic"
     private val qos = 1
 
-    fun ByteArray.toHex() = joinToString(separator = "") { byte -> "%02x".format(byte) }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +54,7 @@ class MainFragment : Fragment(), BluetoothController.Listener {
         binding = FragmentMainBinding.inflate(inflater, container, false)
         binding.FrameLayout2.setVisibility(View.GONE)
         // MQTT клиент и подписка
+        /*
         mqttClient =
             MqttAndroidClient(requireContext(), mqttServerUri, clientId, MemoryPersistence())
         mqttClient.setCallback(mqttCallback)
@@ -73,11 +73,11 @@ class MainFragment : Fragment(), BluetoothController.Listener {
                 ).show()
             }
 
-        })
+        })   */
         return binding.root
 
     }
-
+/*
     private fun subscribeToTopic() {
         mqttClient.subscribe(subscriptionTopic, qos, null, object : IMqttActionListener {
             override fun onSuccess(asyncActionToken: IMqttToken?) {
@@ -94,12 +94,12 @@ class MainFragment : Fragment(), BluetoothController.Listener {
             }
         })
     }
-
+*/
     private fun publishMessage(message: String) {
         try {
             val mqttMessage = MqttMessage()
             mqttMessage.payload = message.toByteArray()
-            mqttClient.publish(publishTopic, mqttMessage)
+            //mqttClient.publish(publishTopic, mqttMessage)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -109,7 +109,7 @@ class MainFragment : Fragment(), BluetoothController.Listener {
         override fun connectComplete(reconnect: Boolean, serverURI: String) {
             if (reconnect) {
                 // Подключение было восстановлено
-                subscribeToTopic()
+             //   subscribeToTopic()
             } else {
                 // Новое подключение
                 Toast.makeText(requireContext(), "Connected to MQTT broker", Toast.LENGTH_SHORT)
@@ -252,7 +252,7 @@ class MainFragment : Fragment(), BluetoothController.Listener {
         }
     override fun onDestroyView() {
         super.onDestroyView()
-        mqttClient.disconnect()
+        //mqttClient.disconnect()
     }
     }
 

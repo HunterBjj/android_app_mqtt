@@ -1,7 +1,10 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<!-- res/values/styles.xml -->
+<resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.MQTT_BT_APP" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/blue</item>
     </style>
 </resources>
