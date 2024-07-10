@@ -8,34 +8,8 @@
     android:background="#FFFFFF"
     >
 
-    <TextView
-        android:id="@+id/lux"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="60dp"
-        android:text="Уровень освещенности:"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="568dp"
-        android:layout_height="165dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-        android:pointerIcon="context_menu"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/niipp" />
+
 
     <TextView
         android:id="@+id/textColor"
@@ -65,23 +39,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lux" />
 
-    <TextView
-        android:id="@+id/onOff"
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:layout_marginTop="25dp"
-        android:text="Дальность:"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textColorLink="@color/purple_500"
-        android:textIsSelectable="false"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/glimpsMode"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textColor"
-        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/glimpsMode"
@@ -105,7 +62,7 @@
         android:autoSizeMinTextSize="7dp"
         android:autoSizeStepGranularity="2dp"
         android:autoSizeTextType="uniform"
-        android:text="Данные с навигационного огня"
+        android:text="Данные"
         android:textAlignment="center"
         android:textColor="@color/purple_500"
         app:layout_constraintBottom_toTopOf="@+id/lux"
@@ -121,13 +78,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
             android:background="@color/purple_500"
-            >
+            android:gravity="center"
+            android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
@@ -136,70 +93,44 @@
                 app:cardCornerRadius="30dp"
                 app:cardElevation="20dp">
 
-                <LinearLayout
-                    android:layout_width="277dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@color/white"
-                    android:orientation="vertical"
-                    android:padding="24dp">
-
-
-                    <TextView
-                        android:id="@+id/loginText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Новый пароль"
-                        android:textAlignment="center"
-                        android:textColor="@color/purple_500"
-                        android:textSize="26sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/password"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="40dp"
-                        android:drawablePadding="8dp"
-                        android:hint="Пароль"
-                        android:inputType="textPassword"
-                        android:maxLength="4"
-                        android:maxLines="1"
-                        android:padding="8dp"
-                        android:textColor="@color/black" />
-
-                    <EditText
-                        android:id="@+id/repeatPassword2"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="40dp"
-                        android:drawablePadding="8dp"
-                        android:hint="Повторите пароль"
-                        android:inputType="textPassword"
-                        android:maxLength="4"
-                        android:maxLines="1"
-                        android:padding="8dp"
-                        android:textColor="@color/black" />
-
-                    <Button
-                        android:id="@+id/loginRecovery"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_marginTop="30dp"
-                        android:backgroundTint="@color/black"
-                        android:text="Отправить"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        app:cornerRadius="20dp" />
-
-
-                </LinearLayout>
-
             </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="317dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+
+                <TextView
+                    android:id="@+id/loginText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Логи"
+                    android:textAlignment="center"
+                    android:textColor="@color/purple_500"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/mqttLogsTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:padding="8dp"
+                    android:gravity="start|top"
+                    android:scrollbars="vertical" />
+
+
+            </LinearLayout>
 
 
         </LinearLayout>
-
 
 
     </FrameLayout>

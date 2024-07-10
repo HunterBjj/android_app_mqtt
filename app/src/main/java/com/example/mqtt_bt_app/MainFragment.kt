@@ -72,6 +72,7 @@ class MainFragment : Fragment(), BluetoothController.Listener {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+
         })
         return binding.root
 
@@ -128,6 +129,8 @@ class MainFragment : Fragment(), BluetoothController.Listener {
             val payload = String(message.payload)
             activity?.runOnUiThread {
                 // Обновление интерфейса с полученными данными
+                val logsTextView = binding.FrameLayout2.findViewById<TextView>(R.id.mqttLogsTextView)
+                logsTextView.append("Topic: $topic, Message: $payload\n")
             }
         }
     override fun deliveryComplete(token: IMqttDeliveryToken) {

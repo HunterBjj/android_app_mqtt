@@ -13,7 +13,9 @@
         android:orderInCategory="500"
         app:showAsAction="ifRoom|withText"
         />
-
+    <item
+        android:id="@+id/changePsw"
+        android:title="Лог"/>
     <group android:id="@+id/menuColor" >
         <item
             android:id="@+id/color"
