@@ -25,11 +25,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- Добавьте сервис для MQTT -->
-        <service
-            android:name="org.eclipse.paho.android.service.MqttService"
-            android:enabled="true"
-            android:exported="true"/>
     </application>
 
 </manifest>

@@ -90,17 +90,23 @@
                     android:textSize="26sp"
                     android:textStyle="bold" />
 
+                <Button
+                    android:id="@+id/closeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/purple_500"
+                    android:padding="16dp"
+                    android:text="Закрыть"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/mqttLogsTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/white"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:padding="8dp"
-                    android:gravity="start|top"
-                    android:scrollbars="vertical" />
+                    android:id="@+id/btLogsTextView"
+                    android:layout_width="266dp"
+                    android:layout_height="468dp"
+                    android:text="Список логов" />
 
 
             </LinearLayout>

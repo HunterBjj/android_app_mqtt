@@ -20,15 +20,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mqtt_bt_app.databinding.FragmentMainBinding
 import com.example.bt_def.BluetoothConstants
-import org.eclipse.paho.android.service.MqttAndroidClient
-import org.eclipse.paho.client.mqttv3.IMqttActionListener
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
-import org.eclipse.paho.client.mqttv3.IMqttToken
-import org.eclipse.paho.client.mqttv3.MqttCallbackExtended
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions
-import org.eclipse.paho.client.mqttv3.MqttMessage
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence
-
 
 
 
@@ -36,14 +27,6 @@ class MainFragment : Fragment(), BluetoothController.Listener {
     private lateinit var bluetoothController: BluetoothController
     private lateinit var btAdapter: BluetoothAdapter
     private lateinit var binding: FragmentMainBinding
-    private lateinit var mqttClient: MqttAndroidClient
-
-    private val mqttServerUri = "tcp://mqtt.eclipse.org:1883"
-    private val clientId = "AndroidClient"
-    private val subscriptionTopic = "test/topic"
-    private val publishTopic = "test/topic"
-    private val qos = 1
-
 
 
     override fun onCreateView(
@@ -53,90 +36,12 @@ class MainFragment : Fragment(), BluetoothController.Listener {
         ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
         binding.FrameLayout2.setVisibility(View.GONE)
-        // MQTT клиент и подписка
 
-        mqttClient =
-            MqttAndroidClient(requireContext(), mqttServerUri, clientId, MemoryPersistence())
-        mqttClient.setCallback(mqttCallback)
-        val options = MqttConnectOptions()
-        options.isAutomaticReconnect = true
-        mqttClient.connect(options, null, object : IMqttActionListener {
-            override fun onSuccess(asyncActionToken: IMqttToken?) {
-                subscribeToTopic()
-            }
-
-            override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
-                Toast.makeText(
-                    requireContext(),
-                    "Failed to connect to MQTT broker",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
-        })
         return binding.root
 
     }
 
-    private fun subscribeToTopic() {
-        mqttClient.subscribe(subscriptionTopic, qos, null, object : IMqttActionListener {
-            override fun onSuccess(asyncActionToken: IMqttToken?) {
-                Toast.makeText(requireContext(), "Subscribed to MQTT topic", Toast.LENGTH_SHORT)
-                    .show()
-            }
 
-            override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
-                Toast.makeText(
-                    requireContext(),
-                    "Failed to subscribe to MQTT topic",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        })
-    }
-
-    private fun publishMessage(message: String) {
-        try {
-            val mqttMessage = MqttMessage()
-            mqttMessage.payload = message.toByteArray()
-            mqttClient.publish(publishTopic, mqttMessage)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    private val mqttCallback = object : MqttCallbackExtended {
-        override fun connectComplete(reconnect: Boolean, serverURI: String) {
-            if (reconnect) {
-                // Подключение было восстановлено
-                subscribeToTopic()
-            } else {
-                // Новое подключение
-                Toast.makeText(requireContext(), "Connected to MQTT broker", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
-
-        override fun connectionLost(cause: Throwable) {
-            // Потеря соединения
-            Toast.makeText(requireContext(), "Connection lost to MQTT broker", Toast.LENGTH_SHORT)
-                .show()
-        }
-
-        @Throws(Exception::class)
-        override fun messageArrived(topic: String, message: MqttMessage) {
-            // Получение сообщения от MQTT
-            val payload = String(message.payload)
-            activity?.runOnUiThread {
-                // Обновление интерфейса с полученными данными
-                val logsTextView = binding.FrameLayout2.findViewById<TextView>(R.id.mqttLogsTextView)
-                logsTextView.append("Topic: $topic, Message: $payload\n")
-            }
-        }
-    override fun deliveryComplete(token: IMqttDeliveryToken) {
-        // Доставка сообщения завершена
-    }
-}
         override fun onResume() {
             super.onResume()
             activity?.invalidateOptionsMenu() // Для фрагмента
@@ -175,7 +80,7 @@ class MainFragment : Fragment(), BluetoothController.Listener {
             try {
                 binding.apply {
                     //val bundle = Bundle()
-
+                    closeButton.setOnClickListener {  FrameLayout2.setVisibility(View.GONE) }
                     if (item.itemId == R.id.id_bt_connect) { // Подключение к ESP32.
                         initBtAdapter()
                         val pref = activity?.getSharedPreferences(
@@ -222,6 +127,11 @@ class MainFragment : Fragment(), BluetoothController.Listener {
                         )
                             .show()
                     }
+
+                    else if (item.itemId == R.id.changePsw) {
+                    FrameLayout2.setVisibility(View.VISIBLE)
+
+                }
                 }
             } catch (e: Exception) {
                 Toast.makeText(requireActivity(), "Сбой подключения к огню", Toast.LENGTH_LONG)
@@ -229,6 +139,7 @@ class MainFragment : Fragment(), BluetoothController.Listener {
             }
             return super.onOptionsItemSelected(item)
         }
+
 
         private fun initBtAdapter() {
             val bManager = activity?.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
@@ -242,6 +153,12 @@ class MainFragment : Fragment(), BluetoothController.Listener {
                 } else if (message == "2") {
                     binding.textColor.text = "Цвет свечения: Желтый"
                 }
+                // Добавление сообщения в лог
+                val logsTextView = binding.FrameLayout2.findViewById<TextView>(R.id.btLogsTextView)
+                logsTextView.append("Bluetooth log: $message\n")
+                // Прокрутка до конца текста
+                val scrollAmount = logsTextView.layout.getLineTop(logsTextView.lineCount) - logsTextView.height
+                if (scrollAmount > 0) logsTextView.scrollTo(0, scrollAmount) else logsTextView.scrollTo(0, 0)
             }
         }
 
@@ -252,7 +169,6 @@ class MainFragment : Fragment(), BluetoothController.Listener {
         }
     override fun onDestroyView() {
         super.onDestroyView()
-        mqttClient.disconnect()
     }
     }
 
