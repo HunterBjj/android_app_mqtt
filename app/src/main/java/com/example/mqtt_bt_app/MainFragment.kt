@@ -72,69 +72,64 @@ class MainFragment : Fragment(), BluetoothController.Listener {
         override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
             inflater.inflate(R.menu.main_menu, menu)
             super.onCreateOptionsMenu(menu, inflater)
-            menu.setGroupVisible(R.id.menuColor, false)
         }
 
 
         override fun onOptionsItemSelected(item: MenuItem): Boolean {
             try {
                 binding.apply {
-                    //val bundle = Bundle()
-                    closeButton.setOnClickListener {  FrameLayout2.setVisibility(View.GONE) }
-                    if (item.itemId == R.id.id_bt_connect) { // Подключение к ESP32.
-                        initBtAdapter()
-                        val pref = activity?.getSharedPreferences(
-                            BluetoothConstants.PREFERENCES, Context.MODE_PRIVATE
-                        )
-                        val mac = pref?.getString(BluetoothConstants.MAC, "")
-                        bluetoothController = BluetoothController(btAdapter)
-                        bluetoothController.connect(mac ?: "", this@MainFragment)
-                        Toast.makeText(requireActivity(), "Подключение к маяку", Toast.LENGTH_SHORT)
-                            .show()
-                    } else if (item.itemId == R.id.id_search) {
-                        findNavController().navigate(R.id.listFragment)
-                    } else if (item.itemId == R.id.redButton) {
-                        bluetoothController.sendMessage("R") //RED
-                        Toast.makeText(
-                            requireActivity(),
-                            "Вы выбрали красный цвет",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
+                    // Set onClickListener for closeButton
+                    closeButton.setOnClickListener { FrameLayout2.setVisibility(View.GONE) }
 
-                    } else if (item.itemId == R.id.yellowButton) {
-                        bluetoothController.sendMessage("Y") //RED
-                        Toast.makeText(
-                            requireActivity(),
-                            "Вы выбрали желтый цвет",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                    } else if (item.itemId == R.id.greenButton) {
-                        bluetoothController.sendMessage("G")
-                        Toast.makeText(
-                            requireActivity(),
-                            "Вы выбрали зеленый цвет",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                    } else if (item.itemId == R.id.whiteButton) {
-                        bluetoothController.sendMessage("W")
-                        Toast.makeText(
-                            requireActivity(),
-                            "Вы выбрали белый цвет",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
+                    // Handle menu item selection
+                    when (item.itemId) {
+                        R.id.id_bt_connect -> {
+                            initBtAdapter()
+                            val pref = activity?.getSharedPreferences(BluetoothConstants.PREFERENCES, Context.MODE_PRIVATE)
+                            val mac = pref?.getString(BluetoothConstants.MAC, "")
+                            bluetoothController = BluetoothController(btAdapter)
+                            bluetoothController.connect(mac ?: "", this@MainFragment)
+                            Toast.makeText(requireActivity(), "Подключение к маяку", Toast.LENGTH_SHORT).show()
+                        }
+                        R.id.id_search -> {
+                            findNavController().navigate(R.id.listFragment)
+                        }
+                        R.id.redButton -> {
+                            bluetoothController.sendMessage("R") // RED
+                            Toast.makeText(requireActivity(), "Вы выбрали красный цвет", Toast.LENGTH_SHORT).show()
+                        }
+                        R.id.yellowButton -> {
+                            bluetoothController.sendMessage("Y") // YELLOW
+                            Toast.makeText(requireActivity(), "Вы выбрали желтый цвет", Toast.LENGTH_SHORT).show()
+                        }
+                        R.id.greenButton -> {
+                            bluetoothController.sendMessage("G") // GREEN
+                            Toast.makeText(requireActivity(), "Вы выбрали зеленый цвет", Toast.LENGTH_SHORT).show()
+                        }
+                        R.id.whiteButton -> {
+                            bluetoothController.sendMessage("W") // WHITE
+                            Toast.makeText(requireActivity(), "Вы выбрали белый цвет", Toast.LENGTH_SHORT).show()
+                        }
+                        R.id.changePsw -> {
+                            FrameLayout2.setVisibility(View.VISIBLE)
+                        }
+                        R.id.glimps0 -> {
+                            bluetoothController.sendMessage("0")
+                            Toast.makeText(requireActivity(), "Вы выбрали режим: Постоянный", Toast.LENGTH_SHORT).show()
+                        }
+                        R.id.glimps1 -> {
+                            bluetoothController.sendMessage("1")
+                            Toast.makeText(requireActivity(), "Вы выбрали режим: Однопроблесковый", Toast.LENGTH_SHORT).show()
+                        }
+                        R.id.glimps2 -> {
+                            bluetoothController.sendMessage("2")
+                            Toast.makeText(requireActivity(), "Вы выбрали режим: Затмевающий", Toast.LENGTH_SHORT).show()
+                        }
+                        else -> return super.onOptionsItemSelected(item)
                     }
-
-                    else if (item.itemId == R.id.changePsw) {
-                    FrameLayout2.setVisibility(View.VISIBLE)
-
-                }
                 }
             } catch (e: Exception) {
-                Toast.makeText(requireActivity(), "Сбой подключения к огню", Toast.LENGTH_LONG)
+                Toast.makeText(requireActivity(), "Сбой подключения", Toast.LENGTH_LONG)
                     .show()
             }
             return super.onOptionsItemSelected(item)

@@ -36,5 +36,24 @@
             </menu>
         </item>
     </group>
+    <group android:id="@+id/menuGlimps" >
+        <item
+            android:id="@+id/glimps"
+            android:icon="@drawable/mode_exam"
+            android:title="РЕЖИМ СВЕЧЕНИЯ">
+            <menu>
+                <item
+                    android:id="@+id/glimps0"
+                    android:title="Постоянный"
+                    />
+                <item
+                    android:id="@+id/glimps1"
+                    android:title="Однопроблесковый"/>
+                <item
+                    android:id="@+id/glimps2"
+                    android:title="Затмевающий"/>
+            </menu>
+        </item>
+    </group>
 
 </menu>
