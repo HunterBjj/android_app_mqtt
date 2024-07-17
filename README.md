@@ -6,7 +6,7 @@
 
 Установите и настройте виртуальную среду Python:
 
-
+#
 
 sudo apt-get update
 
@@ -18,13 +18,13 @@ source venv/bin/activate
 
 Установите необходимые зависимости:
 
-
+#
 
 pip install -r python_service/requirements.txt
 
 Запустите MQTT брокер (например, Mosquitto):
 
-
+#
 
 sudo apt-get install -y mosquitto
 
@@ -32,7 +32,7 @@ sudo systemctl start mosquitto
 
 Настройте и запустите сервис через systemd:
 
-
+#
 
 
 sudo cp python_service/mqtt_ble_service.service /etc/systemd/system/
