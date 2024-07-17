@@ -148,15 +148,29 @@ class MainFragment : Fragment(), BluetoothController.Listener {
                 } else if (message == "2") {
                     binding.textColor.text = "Цвет свечения: Желтый"
                 }
+                else if(message == "4") {
+                    binding.textColor.text = "Цвет свечения: Белый"
+                }
+                else if(message == "13") {
+                    binding.textColor.text = "Цвет свечения: Зеленый"
+                }
+                else if(message == "-0") {
+                    binding.glimpsMode.text = "Режим проблеска: Постоянный"
+                }
+                else if(message == "-1") {
+                    binding.glimpsMode.text = "Режим проблеска: Однопроблесковый"
+                }
+                else if(message == "-2") {
+                    binding.glimpsMode.text = "Режим проблеска: Затмевающий "
+                }
                 // Добавление сообщения в лог
                 val logsTextView = binding.FrameLayout2.findViewById<TextView>(R.id.btLogsTextView)
-                logsTextView.append("Bluetooth log: $message\n")
+                logsTextView.append("log: $message\n")
                 // Прокрутка до конца текста
                 val scrollAmount = logsTextView.layout.getLineTop(logsTextView.lineCount) - logsTextView.height
                 if (scrollAmount > 0) logsTextView.scrollTo(0, scrollAmount) else logsTextView.scrollTo(0, 0)
             }
         }
-
 
         override fun onDestroy() {
             super.onDestroy()
