@@ -8,7 +8,6 @@
 
 
 sh
-Копировать код
 
 sudo apt-get update
 
@@ -22,7 +21,6 @@ source venv/bin/activate
 
 
 sh
-Копировать код
 
 pip install -r python_service/requirements.txt
 
@@ -30,7 +28,6 @@ pip install -r python_service/requirements.txt
 
 sh
 
-Копировать код
 
 sudo apt-get install -y mosquitto
 
@@ -40,7 +37,7 @@ sudo systemctl start mosquitto
 
 sh
 
-Копировать код
+
 
 sudo cp python_service/mqtt_ble_service.service /etc/systemd/system/
 
