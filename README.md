@@ -1,32 +1,52 @@
-### Андройд приложение с Blutootch и mqtt сервером на python
+# <p align="center"> Андройд приложение с Blutootch и mqtt сервером на python </p>
 
-Приложение передает и принимает данные по протоколу MQTT
+Инструкции по Установке и Запуску
 
-/
-├── python_service/
+Установка и Запуск Python Сервиса
 
-│   ├── mqtt_ble_service.py
+Установите и настройте виртуальную среду Python:
 
-│   ├── requirements.txt
 
-│   └── mqtt_ble_service.service
+sh
+Копировать код
 
-├── android_app/
+sudo apt-get update
 
-│   ├── app/
+sudo apt-get install -y python3-venv
 
-│   ├── build.gradle
+python3 -m venv venv
 
-│   ├── src/
+source venv/bin/activate
 
-│   └── ...
+Установите необходимые зависимости:
 
-├── screenshots/
 
-│   ├── service_status.png
+sh
+Копировать код
 
-│   ├── mqtt_explorer.png
+pip install -r python_service/requirements.txt
 
-│   └── android_app.png
+Запустите MQTT брокер (например, Mosquitto):
 
-└── README.md
+sh
+
+Копировать код
+
+sudo apt-get install -y mosquitto
+
+sudo systemctl start mosquitto
+
+Настройте и запустите сервис через systemd:
+
+sh
+
+Копировать код
+
+sudo cp python_service/mqtt_ble_service.service /etc/systemd/system/
+
+sudo systemctl daemon-reload
+
+sudo systemctl start mqtt_ble_service
+
+sudo systemctl enable mqtt_ble_service
+
