@@ -1,10 +1,10 @@
 # <p align="center"> Андройд приложение с Blutootch и mqtt сервером на python </p>
 
-Инструкции по Установке и Запуску
+Инструкции по установке и запуску
 
 #
 
-Установка и Запуск Python Сервиса
+установка и запуск Python сервиса
 
 Установите и настройте виртуальную среду Python:
 
@@ -16,15 +16,18 @@ python3 -m venv venv
 
 source venv/bin/activate
 
-Установите необходимые зависимости:
 
 #
+
+Установите необходимые зависимости:
 
 pip install -r python_service/requirements.txt
 
-Запустите MQTT брокер (например, Mosquitto):
 
 #
+
+
+Запустите MQTT брокер (например, Mosquitto):
 
 sudo apt-get install -y mosquitto
 
