@@ -2,11 +2,11 @@
 
 Инструкции по Установке и Запуску
 
+#
+
 Установка и Запуск Python Сервиса
 
 Установите и настройте виртуальную среду Python:
-
-#
 
 sudo apt-get update
 
@@ -30,10 +30,11 @@ sudo apt-get install -y mosquitto
 
 sudo systemctl start mosquitto
 
-Настройте и запустите сервис через systemd:
+
 
 #
 
+Настройте и запустите сервис через systemd:
 
 sudo cp python_service/mqtt_ble_service.service /etc/systemd/system/
 
