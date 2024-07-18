@@ -89,7 +89,7 @@ class MainFragment : Fragment(), BluetoothController.Listener {
                             val mac = pref?.getString(BluetoothConstants.MAC, "")
                             bluetoothController = BluetoothController(btAdapter)
                             bluetoothController.connect(mac ?: "", this@MainFragment)
-                            Toast.makeText(requireActivity(), "Подключение к маяку", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireActivity(), "Подключение", Toast.LENGTH_SHORT).show()
                         }
                         R.id.id_search -> {
                             findNavController().navigate(R.id.listFragment)
