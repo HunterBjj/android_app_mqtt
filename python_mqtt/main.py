@@ -53,7 +53,13 @@ def main():
     client.loop_start()  # Start the MQTT client loop in a separate thread
 
     loop = asyncio.get_event_loop()
-    loop.run_forever()
+    try:
+        loop.run_forever()
+    except KeyboardInterrupt:
+        print("Exiting program...")
+    finally:
+        client.loop_stop()
+        client.disconnect()
 
 if __name__ == "__main__":
     main()
