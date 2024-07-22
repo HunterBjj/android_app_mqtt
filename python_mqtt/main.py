@@ -78,6 +78,7 @@ def main():
 
     loop = asyncio.get_event_loop()
     try:
+        loop.create_task(listen_ble_notifications())  # Запуск прослушивания уведомлений BLE.
         loop.run_forever()
     except KeyboardInterrupt:
         print("Exiting program...")
