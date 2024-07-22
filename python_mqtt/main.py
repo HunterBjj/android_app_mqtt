@@ -41,9 +41,10 @@ def on_message(client, userdata, msg):
         current_glimpse = data
     
     if current_color is not None and current_glimpse is not None:
-        combined_data = f"Color: {current_color}, Glimpse: {current_glimpse}"
+        #combined_data = f"Color: {current_color}, Glimpse: {current_glimpse}"
         print(f"Received message: {msg.topic} {data}")
-        asyncio.run(send_ble_data(combined_data))
+        asyncio.run(send_ble_data(current_color))
+        asyncio.run(send_ble_data(current_glimpse))
 
 def main():
     client.on_connect = on_connect
