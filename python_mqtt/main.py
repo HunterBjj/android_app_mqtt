@@ -46,12 +46,33 @@ def on_message(client, userdata, msg):
         asyncio.run(send_ble_data(current_color))
         asyncio.run(send_ble_data(current_glimpse))
 
+async def handle_ble_notification(sender, data):
+    message = data.decode()
+    print(f"Received data from BLE device: {message}")
+
+    if 'R' or 'Y' or 'G' or 'W' in message:  # Данные которые пришли по BLE. 
+        client.publish("mqtt/color", message)
+        print(f"Published {message} to mqtt/color")
+    elif '0' or '1' or '2' in message:
+        client.publish("mqtt/glimpse", message)
+        print(f"Published {message} to mqtt/glimpse")
+
+async def listen_ble_notifications():
+    try:
+        async with BleakClient(BLE_DEVICE_ADDRESS) as ble_client:
+            await ble_client.start_notify(BLE_CHARACTERISTIC_UUID, handle_ble_notification)
+            print("Listening for BLE notifications...")
+            while True:
+                await asyncio.sleep(1)
+    except Exception as e:
+        print(f"Failed to listen for BLE notifications: {e}")
+
 def main():
     client.on_connect = on_connect
     client.on_message = on_message
 
     client.connect(MQTT_BROKER, MQTT_PORT, 60)
-    client.loop_start()  # Start the MQTT client loop in a separate thread
+    client.loop_start()  
 
     loop = asyncio.get_event_loop()
     try:
