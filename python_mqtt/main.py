@@ -69,9 +69,11 @@ def on_message(client, userdata, msg):
         current_glimpse = data
 
     if current_color and current_glimpse:
-        combined_data = f"Color: {current_color}, Glimpse: {current_glimpse}"
         print(f"Publishing to BLE: {combined_data}")
-        # TODO: Send data to BLE device here
+        if hasattr(userdata, 'peripheral') and userdata.peripheral:
+            userdata.peripheral.send_data(current_color)
+            userdata.peripheral.send_data(current_glimpse)
+        # TODO: Протестировать отправку данных.
 
 def main():
     # Set up MQTT client
