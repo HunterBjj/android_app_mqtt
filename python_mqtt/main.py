@@ -53,6 +53,14 @@ class MyPeripheral(Peripheral):
         self.addService(MyService(self))
         self.advertise_name = "BLEDevice_MQTT"
 
+    def adverise(self, name):
+        print(f'Advertising BLE device with name: {name}')
+
+    def send_data(self, data):
+        service = self.getServiceByUUID(SERVICE_UUID)
+        characteristic = service.get.Characteristics(CHARACTERISTIC_UUID)[0]
+        characteristic.write(data.encode())
+
 def on_connect(client, userdata, flags, rc):
     print(f"Connected to MQTT broker with result code {rc}")
     for topic, qos in MQTT_TOPICS:
@@ -79,15 +87,21 @@ def main():
     # Set up MQTT client
     client.on_connect = on_connect
     client.on_message = on_message
+
+    userdata = type('', (), {})()
     client.connect(MQTT_BROKER, MQTT_PORT, 60)
     client.loop_start()
 
     # Set up BLE server
-    peripheral = MyPeripheral()
-    print("BLE server is advertising...")
-    while True:
-        peripheral.advertise(peripheral.advertise_name)
-        time.sleep(1)
+    #peripheral = MyPeripheral()
+    peripheral = userdata.peripheral
+    def ble_advertise():
+        print("BLE server is advertising...")
+        while True:
+            peripheral.advertise(peripheral.advertise_name)
+            time.sleep(1)
+    ble_thread = threading.Thread(target=ble_advertise)
+    ble_thread.start()
 
 if __name__ == "__main__":
     main()
