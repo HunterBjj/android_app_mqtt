@@ -83,7 +83,7 @@ def on_message(client, userdata, msg):
             userdata.peripheral.send_data(current_glimpse)
         # TODO: Протестировать отправку данных.
 
-def main()
+def main():
     global clietn 
     
     client.on_connect = on_connect
