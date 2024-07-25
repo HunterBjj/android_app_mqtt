@@ -32,6 +32,13 @@ class BLEServer:
         service = self.peripheral.getServiceByUUID(SERVICE_UUID)
         characteristic = service.getCharacteristics(CHARACTERISTIC_UUID)[0]
         characteristic.write(data.encode())
+
+    def set_service(self, *args):
+        if len(args) == 4:  # Проверка количества элементов
+            self.peripheral, uuidVal, self.hndStart, self.hndEnd = args
+        else:
+            print(f"Invalid args: expected 4, got {len(args)}")
+
         
 
 class MyCharacteristic(Characteristic):
@@ -111,7 +118,7 @@ class UserData:
 
 
 def main():
-    global clietn 
+    global client
     
     client.on_connect = on_connect
     client.on_message = on_message
