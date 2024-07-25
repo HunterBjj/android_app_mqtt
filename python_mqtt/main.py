@@ -58,7 +58,7 @@ class MyPeripheral(Peripheral):
 
     def send_data(self, data):
         service = self.getServiceByUUID(SERVICE_UUID)
-        characteristic = service.get.Characteristics(CHARACTERISTIC_UUID)[0]
+        characteristic = service.getCharacteristics(CHARACTERISTIC_UUID)[0]
         characteristic.write(data.encode())
 
 def on_connect(client, userdata, flags, rc):
@@ -83,8 +83,9 @@ def on_message(client, userdata, msg):
             userdata.peripheral.send_data(current_glimpse)
         # TODO: Протестировать отправку данных.
 
-def main():
-    # Set up MQTT client
+def main()
+    global clietn 
+    
     client.on_connect = on_connect
     client.on_message = on_message
 
