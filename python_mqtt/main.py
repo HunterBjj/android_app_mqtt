@@ -72,7 +72,7 @@ class MyCharacteristic(Characteristic):
 class MyService(Service):
     def __init__(self, peripheral):
         try:
-            Service.__init__(self, peripheral, SERVICE_UUID, True)
+            Service.__init__(self, peripheral, SERVICE_UUID)
         except ValueError as e:
             print(f"Error initializing Service: {e}")
             # Возможно, следует пересмотреть передачу параметров в Service
