@@ -16,6 +16,24 @@ client = mqtt.Client()
 current_color = None
 current_glimpse = None
 
+class BLEServer:
+    def __init__(self):
+        from bluepy import btle
+
+        self.peripheral = btle.Peripheral()
+        self.service = MyService(self.peripheral)
+        self.peripheral.addService(self.service)  # Добавление сервиса к периферии
+
+    def advertise(self, name):
+        print(f'Advertising BLE device with name: {name}')
+        # Добавьте код для начала рекламы BLE сервиса здесь
+
+    def send_data(self, data):
+        service = self.peripheral.getServiceByUUID(SERVICE_UUID)
+        characteristic = service.getCharacteristics(CHARACTERISTIC_UUID)[0]
+        characteristic.write(data.encode())
+        
+
 class MyCharacteristic(Characteristic):
     def __init__(self, service, uuid, properties):
         Characteristic.__init__(self, service, uuid, properties)
@@ -85,7 +103,7 @@ def on_message(client, userdata, msg):
 
 class UserData:
     def __init__(self):
-        self.peripheral = MyPeripheral()
+        self.peripheral = BLEServer()
 
 
 def main():
@@ -100,8 +118,6 @@ def main():
     client.connect(MQTT_BROKER, MQTT_PORT, 60)
     client.loop_start()
 
-    # Set up BLE server
-    #peripheral = MyPeripheral()
     peripheral = userdata.peripheral
     def ble_advertise():
         print("BLE server is advertising...")
