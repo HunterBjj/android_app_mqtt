@@ -81,8 +81,12 @@ class MyPeripheral(Peripheral):
 
 def on_connect(client, userdata, flags, rc):
     print(f"Connected to MQTT broker with result code {rc}")
-    for topic, qos in MQTT_TOPICS:
-        client.subscribe((topic, qos))
+    for item in MQTT_TOPICS:
+        if len(item) == 2:  # Убедитесь, что есть два значения для распаковки
+            topic, qos = item
+            client.subscribe((topic, qos))
+        else:
+            print(f"Invalid item: {item}")
     print(f"Subscribed to topics: {MQTT_TOPICS}")
 
 def on_message(client, userdata, msg):
