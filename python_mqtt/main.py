@@ -83,13 +83,20 @@ def on_message(client, userdata, msg):
             userdata.peripheral.send_data(current_glimpse)
         # TODO: Протестировать отправку данных.
 
+class UserData:
+    def __init__(self):
+        self.peripheral = MyPeripheral()
+
+
 def main():
     global clietn 
     
     client.on_connect = on_connect
     client.on_message = on_message
 
-    userdata = type('', (), {})()
+    userdata = UserData()
+    client.user_data_set(userdata)
+    
     client.connect(MQTT_BROKER, MQTT_PORT, 60)
     client.loop_start()
 
