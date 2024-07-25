@@ -21,7 +21,10 @@ class BLEServer:
         from bluepy import btle
 
         self.peripheral = btle.Peripheral()
-        self.service = MyService(self.peripheral)
+        try:
+            self.service = MyService(self.peripheral)
+        except ValueError as e:
+            print(f"Error initializing MyService: {e}")
         self.peripheral.addService(self.service)  # Добавление сервиса к периферии
 
     def advertise(self, name):
@@ -68,7 +71,11 @@ class MyCharacteristic(Characteristic):
 
 class MyService(Service):
     def __init__(self, peripheral):
-        Service.__init__(self, peripheral, SERVICE_UUID, True)
+        try:
+            Service.__init__(self, peripheral, SERVICE_UUID, True)
+        except ValueError as e:
+            print(f"Error initializing Service: {e}")
+            # Возможно, следует пересмотреть передачу параметров в Service
         self.characteristic = MyCharacteristic(self, CHARACTERISTIC_UUID,
                                                 Characteristic.FLAG_READ | Characteristic.FLAG_WRITE)
 
