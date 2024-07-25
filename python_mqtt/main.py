@@ -1,6 +1,7 @@
 import paho.mqtt.client as mqtt
 from bluepy.btle import Peripheral, UUID, Service, Characteristic
 import threading
+import time
 
 # MQTT settings
 MQTT_BROKER = "localhost"
