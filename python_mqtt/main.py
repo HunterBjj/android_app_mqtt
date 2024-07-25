@@ -76,7 +76,7 @@ class MyService(Service):
             print(f"Error initializing Service: {e}")
             # Возможно, следует пересмотреть передачу параметров в Service
         self.characteristic = MyCharacteristic(self, CHARACTERISTIC_UUID,
-                                                Characteristic.FLAG_READ | Characteristic.FLAG_WRITE)
+                                                Characteristic.props["READ"] | Characteristic.props["WRITE"])
 
 class MyPeripheral(Peripheral):
     def __init__(self):
