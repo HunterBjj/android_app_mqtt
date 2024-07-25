@@ -25,6 +25,8 @@ class BLEServer:
             self.service = MyService(self.peripheral)
         except ValueError as e:
             print(f"Error initializing MyService: {e}")
+        self.peripheral.addService(self.service)  # Добавление сервиса к периферии
+        self.advertise_name = "BLEDevice_MQTT"  # Определяем атрибут advertise_name
             
     def advertise(self, name):
         print(f'Advertising BLE device with name: {name}')
