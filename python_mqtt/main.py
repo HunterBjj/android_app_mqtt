@@ -22,11 +22,12 @@ class BLEServer:
         from bluepy import btle
 
         self.peripheral = btle.Peripheral()
+        self.advertise_name = "BLEDevice_MQTT"  # Определяем атрибут advertise_name
         try:
             self.service = MyService(self.peripheral)
         except ValueError as e:
             print(f"Error initializing MyService: {e}")
-        self.advertise_name = "BLEDevice_MQTT"  # Определяем атрибут advertise_name
+        
             
     def advertise(self, name):
         print(f'Advertising BLE device with name: {name}')
