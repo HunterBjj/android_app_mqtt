@@ -1,6 +1,7 @@
 import paho.mqtt.client as mqtt
 from bluepy.btle import Peripheral, UUID, Service, Characteristic
 import threading
+from bluepy import btle
 import time
 
 # MQTT settings
@@ -19,8 +20,6 @@ current_glimpse = None
 
 class BLEServer:
     def __init__(self):
-        from bluepy import btle
-
         self.peripheral = btle.Peripheral()
         self.advertise_name = "BLEDevice_MQTT"  # Определяем атрибут advertise_name
         try:
