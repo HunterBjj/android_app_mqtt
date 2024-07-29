@@ -1,4 +1,4 @@
-# <p align="center"> Андройд приложение с Blutootch и mqtt сервером на python </p>
+# <p align="center"> Андройд приложение с Bluetooth и mqtt сервером на python </p>
 
 Инструкции по установке и запуску
 
