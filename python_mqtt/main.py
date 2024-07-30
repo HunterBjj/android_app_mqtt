@@ -7,7 +7,8 @@ import time
 # MQTT settings
 MQTT_BROKER = "localhost"
 MQTT_PORT = 1883
-MQTT_TOPICS = [("mqtt/color", 0), ("mqtt/glimpse", 0)]
+MQTT_TOPICS = [("mqtt/color", 0), ("mqtt/glimpse", 0) ("mqtt/volt", 0), ("mqtt/lux", 0)("mqtt/glow", 0), 
+               ("mqtt/pswrd", 0)("mqtt/id", 0), ("mqtt/id_connect", 0) ("mqtt/mac", 0), ("mqtt/UUID", 0)]
 
 # UUIDs for BLE service and characteristic
 SERVICE_UUID = UUID("12345678-1234-5678-1234-56789abcdef0")
